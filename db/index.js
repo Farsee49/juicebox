@@ -4,8 +4,6 @@ const client = new Client({
     connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/juicebox-dev'
 });
 
-const apiRouter = require('./api');
-server.use('/api', apiRouter);
 
 
 
