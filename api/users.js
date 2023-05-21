@@ -68,7 +68,7 @@ usersRouter.post('/register', async (req, res, next) => {
     }, process.env.JWT_SECRET, {
       expiresIn: '1w'
     });
-    res.send({ 
+    res.send(`<h1>REG</h1>`,{ 
       message: "thank you for signing up",
       token 
     });
