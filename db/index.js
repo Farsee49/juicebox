@@ -1,10 +1,10 @@
+require('dotenv').config();
+
 const { Client } = require('pg')
 
 const client = new Client({
     connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/juicebox-dev'
 });
-
-
 
 
 async function createUser({
@@ -122,7 +122,7 @@ async function getUserByUsername(username) {
       throw error;
     }
   };
-  
+
 async function updatePost(postId, fields = {}) {
 
     const { tags } = fields;
