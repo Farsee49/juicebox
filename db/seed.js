@@ -192,6 +192,7 @@ async function testDB() {
       console.log("Result:", postsWithHappy);
 
       console.log("Finished database tests!");
+      client.end()
   } catch (error) {
       console.log("Error during testDB");
       throw error;
@@ -202,4 +203,4 @@ async function testDB() {
 rebuildDB()
   .then(testDB)
   .catch(console.error)
-  .finally(() => client.end());
+ // .finally(() => client.end());
