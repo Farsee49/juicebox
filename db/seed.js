@@ -20,7 +20,7 @@ async function dropTables() {
     DROP TABLE IF EXISTS post_tags;
     DROP TABLE IF EXISTS tags;
     DROP TABLE IF EXISTS posts;
-    DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS users cascade;
   `);
 
       console.log("Finished dropping tables!");

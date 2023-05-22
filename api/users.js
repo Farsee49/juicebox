@@ -1,10 +1,14 @@
 const express = require('express');
 const usersRouter = express.Router();
+usersRouter.use(express.json());
+const { requireUser } = require('./utils');
 
 const { 
     getAllUsers, 
     getUserByUsername,
-    createUser
+    createUser,
+    getUserById,
+    updateUser
    } = require('../db');
 
 const jwt = require('jsonwebtoken');
@@ -84,4 +88,29 @@ console.log(req.body)
   }; 
 });
 
+usersRouter.delete('/:userId', requireUser, async (req, res, next) => {
+    try {
+      const post = await getUserById(req.params.postId);
+  
+      if (post && post.author.id === req.user.id) {
+        const updatedUser = await updateUser(user.id, { active: false });
+  
+        res.send({ user: updatedUser });
+      } else {
+        // if there was a user, throw UnauthorizedUserError, otherwise throw UserNotFoundError
+        next(post ? { 
+          name: "UnauthorizedUserError",
+          message: "You cannot delete a user which is not yours"
+        } : {
+          name: "UserNotFoundError",
+          message: "That user does not exist"
+        });
+      }
+  
+    } catch ({ name, message }) {
+      next({ name, message })
+    }
+  });
+
 module.exports = usersRouter;
+
