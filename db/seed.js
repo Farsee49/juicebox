@@ -141,7 +141,7 @@ async function rebuildDB() {
       await createTables();
       await createInitialUsers();
       await createInitialPosts();
-      client.end()
+      
   } catch (error) {
       console.log("Error during rebuildDB")
       throw error;
@@ -203,6 +203,6 @@ async function testDB() {
 
 
 rebuildDB()
-//   .then(testDB)
-//   .catch(console.error)
-//  // .finally(() => client.end());
+  .then(testDB)
+  .catch(console.error)
+ .finally(() => client.end());
